@@ -8,6 +8,6 @@ public class CConv {
 
     public double convert(String to, double amount, String from) {
         double pln = amount / table.getRate(from);
-        return pln * table.getRate(to);
+        return Math.round(pln*table.getRate(to)*100.0)/100.0;
     }
 }

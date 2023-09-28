@@ -18,7 +18,9 @@ public class ConvController {
     }
 
     public Boolean updateRates() {
-        return table.updateRates();
+        Boolean resp = table.updateRates();
+        System.out.println(resp?"Rates updated.":"Rates not updated.");
+        return resp;
     }
 
     public void convert(String to, double amount, String from) {

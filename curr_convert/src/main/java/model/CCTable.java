@@ -51,16 +51,23 @@ public class CCTable {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             String jsonStr = response.body();
-            JSONArray resp = new JSONArray(jsonStr);
-            JSONObject jsonObj = resp.getJSONObject(0);
-            JSONArray ratesArr = jsonObj.getJSONArray("rates");
-            File file = new File(csv);
-            FileUtils.writeStringToFile(file, CDL.toString(ratesArr), "UTF-8", true);
+            
+            // If response is not what is expected, return false.
+            try {
+                JSONArray resp = new JSONArray(jsonStr);
+                JSONObject jsonObj = resp.getJSONObject(0);
+                JSONArray ratesArr = jsonObj.getJSONArray("rates");
+                File file = new File(csv);
+                FileUtils.writeStringToFile(file, CDL.toString(ratesArr), "UTF-8", true);
 
-            System.out.println("Rates retrieved.");
-            // Update rates HashMap.
-            updateHashMap();
-            return true;
+                System.out.println("Rates retrieved.");
+                // Update rates HashMap.
+                updateHashMap();
+                return true;
+            } catch (JSONException e) {
+                System.out.println("Error: " + e.getMessage());
+                return false;
+            }
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
