@@ -58,6 +58,7 @@ public class CCTable {
                 JSONObject jsonObj = resp.getJSONObject(0);
                 JSONArray ratesArr = jsonObj.getJSONArray("rates");
                 File file = new File(csv);
+                file.delete();
                 FileUtils.writeStringToFile(file, CDL.toString(ratesArr), "UTF-8", true);
 
                 System.out.println("Rates retrieved.");
