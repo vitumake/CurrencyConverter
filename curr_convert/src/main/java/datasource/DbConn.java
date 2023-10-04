@@ -13,7 +13,7 @@ public class DbConn {
     public static Connection getInstance() {
         if(conn==null){
             try{
-                conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/currencyrates?user=root&password=koulu1234");
+                conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/currencyrates?user=koulu&password=koulu1234");
                 System.out.println("Connected to database.");
             } catch (SQLException e) {
                 System.out.println("Cannot connect to database: " + e.getMessage());

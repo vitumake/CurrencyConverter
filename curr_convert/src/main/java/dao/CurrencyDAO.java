@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrencyDAO {
-
+    
+    private static Connection conn = DbConn.getInstance();
+   
     public List<Currency> getCurrencies() {
-        Connection conn = DbConn.getInstance();
         String sql = "SELECT * FROM currency";
         List<Currency> currencies = new ArrayList<Currency>();
 
@@ -29,19 +30,16 @@ public class CurrencyDAO {
             }
         } catch (SQLException e){
             e.printStackTrace();
-        } finally {
-            DbConn.close();
         }
         return currencies;
     }
 
     public void updateCurrencies(String isocode, double rate) {
-        Connection conn = DbConn.getInstance();
         String sql = "REPLACE INTO currency (isocode, rate) VALUES (?, ?)";
         
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "isocode");
+            stmt.setString(1, isocode);
             stmt.setDouble(2, rate);
             stmt.executeUpdate();
         } catch (SQLException e){

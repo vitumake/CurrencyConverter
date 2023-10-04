@@ -43,6 +43,7 @@ public class ApiDataHandler {
                     double rateVal = rate.getDouble("mid");
                     currencies.add(new Currency(code, rateVal));
                 }
+                return currencies;
 
             } catch (JSONException e) {
                 System.out.println("Error: " + e.getMessage());

@@ -21,6 +21,7 @@ public class ConvController {
 
     public ConvController(ConvGui gui) {
         this.gui = gui;
+        updateRates();
     }
 
     public Boolean updateRates() {
