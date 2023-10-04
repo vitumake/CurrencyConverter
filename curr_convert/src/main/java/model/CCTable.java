@@ -9,11 +9,16 @@ public class CCTable {
     private static CurrencyDAO dao = new CurrencyDAO();
 
     public CCTable() {
-        updateTable();
+        System.out.println(updateTable()? "Table updated." : "Table not updated. No connection to database.");
     }
 
-    public static void updateTable() {
-        CCTable.currencies = (ArrayList<Currency>) dao.getCurrencies();
+    public static Boolean updateTable() {
+        ArrayList<Currency> currList = (ArrayList<Currency>) dao.getCurrencies();
+        if(currList!=null) {
+            CCTable.currencies = currList;
+            return true;
+        }
+        return false;
     }
 
     public double getRate(String code) {

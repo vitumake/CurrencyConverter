@@ -28,10 +28,13 @@ public class CurrencyDAO {
                 currency.setRate(rs.getDouble("rate"));
                 currencies.add(currency);
             }
+            return currencies;
         } catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
         }
-        return currencies;
+        return null;
     }
 
     public void updateCurrencies(String isocode, double rate) {
@@ -43,7 +46,9 @@ public class CurrencyDAO {
             stmt.setDouble(2, rate);
             stmt.executeUpdate();
         } catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("SQL: " + e.getMessage());
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

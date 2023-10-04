@@ -24,7 +24,7 @@ public class ConvController {
         updateRates();
     }
 
-    public Boolean updateRates() {
+    public String updateRates() {
         
         ArrayList<Currency> currList = (ArrayList<Currency>) api.retrieveRates();
         Boolean resp = currList==null?false:true;
@@ -32,10 +32,14 @@ public class ConvController {
             for(Currency currency : currList) {
                 dao.updateCurrencies(currency.getCode(), currency.getRate());
             }
-            CCTable.updateTable();
+            resp = CCTable.updateTable();
+        } else {
+            System.out.println("Error: No connection to API.");
+            return "Rates not updated. No connection to API.";
         }
-        System.out.println(resp?"Rates updated.":"Rates not updated.");
-        return resp;
+        System.out.println(resp?"Rates updated.":"Error: No connection to database.");
+        return resp?"Rates updated.":"Rates not updated. No connection to database.";
+        
     }
 
     public void convert(String to, double amount, String from) {

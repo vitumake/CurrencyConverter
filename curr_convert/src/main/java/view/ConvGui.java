@@ -26,7 +26,7 @@ public class ConvGui extends Application{
     private ObservableList<String> currencies;
     private ComboBox<String> from;
     private ComboBox<String> to;
-    private Boolean updateStatus;
+    private String updateStatus;
 
     public void start(Stage window) {
         GridPane pane = new GridPane();
@@ -96,7 +96,7 @@ public class ConvGui extends Application{
 
         updateButton.setOnAction((event) -> {
             updateStatus = controller.updateRates();
-            updateDialog.setContentText(updateStatus ? "Rates updated." : "Error: Could not update rates.");
+            updateDialog.setContentText(updateStatus);
             updateDialog.showAndWait();
         });
 
